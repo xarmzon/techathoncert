@@ -2,12 +2,8 @@ import { TLink } from "@utils/types";
 
 export const NAV_LINKS: TLink[] = [
   {
-    text: "Home",
-    url: "https://techathonian.com/",
-  },
-  {
-    text: "Components",
-    url: "https://techathonian.com/#components",
+    text: "Verify",
+    url: "/",
   },
   {
     text: "Events",

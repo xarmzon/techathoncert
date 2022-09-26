@@ -10,9 +10,9 @@ const Header = () => {
     setNavOpen((prev) => !prev);
   };
   return (
-    <header className="fixed shadow top-0 h-16 left-0 right-0 w-full border-b-[1px] border-b-secondary/90 bg-white z-[222222]">
+    <header className="fixed shadow top-0 h-16 left-0 right-0 w-full border-b-2 border-b-secondary/90 bg-white z-[222222]">
       <nav className="h-full flex max-w-5xl px-5 py-3 xl:px-0 w-full justify-between items-center mx-auto">
-        <Link href="/">
+        <Link href="https://techathonian.com/">
           <a className="relative w-28 h-6">
             <Image src="/logo.png" layout="fill" />
           </a>
