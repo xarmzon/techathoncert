@@ -21,6 +21,9 @@ module.exports = {
         techathonRegular: ["TechathonRegular", "sans-serif"],
         techathonMedium: ["TechathonMedium", "sans-serif"],
       },
+      backgroundImage: {
+        circuit_bg: "url(/circuit_bg.png)",
+      },
       colors: {
         primary: {
           DEFAULT: "#32376F",

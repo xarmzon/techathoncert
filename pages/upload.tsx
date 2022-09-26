@@ -1,7 +1,8 @@
 import React from "react";
+import Layout from "./layout";
 
 const UploadPage = () => {
-  return <div>UploadPage</div>;
+  return <Layout title="Upload <> Techathon">UploadPage</Layout>;
 };
 
 export default UploadPage;
