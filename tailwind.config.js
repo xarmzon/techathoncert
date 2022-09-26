@@ -15,12 +15,20 @@ module.exports = {
         "2xl": "1440px",
       },
     },
-  },
-  extend: {
-    colors: {
-      primary: "rgb(50,55,111)",
-      secondary: "rgb(34,203,213)",
-      accent: "rgb(152,109,246)",
+
+    extend: {
+      fontFamily: {
+        techathonRegular: ["TechathonRegular", "sans-serif"],
+        techathonMedium: ["TechathonMedium", "sans-serif"],
+      },
+      colors: {
+        primary: {
+          DEFAULT: "#32376F",
+          dark: "#05050b",
+        },
+        secondary: "#22CBD5",
+        accent: "#986DF6",
+      },
     },
   },
   plugins: [

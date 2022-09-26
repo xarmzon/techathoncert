@@ -1,3 +1,27 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: "TechathonRegular";
+  src: url("../public/fonts/Geomanist-Regular.woff");
+}
+@font-face {
+  font-family: "TechathonMedium";
+  src: url("../public/fonts/Geomanist-Medium.woff");
+}
+
+@layer base {
+  #__next {
+    @apply w-full h-full min-h-screen overflow-x-hidden;
+  }
+}
+
+@layer utilities {
+  .clip-0 {
+    clip-path: polygon(100% 0, 100% 0%, 100% 100%, 100% 100%);
+  }
+  .clip-100 {
+    clip-path: polygon(100% 0, 0 0, 0 100%, 100% 100%);
+  }
+}

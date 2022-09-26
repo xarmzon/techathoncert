@@ -87,11 +87,11 @@ class MyDocument extends Document {
             href="/favicon-16x16.png"
           />
           <link rel="manifest" href="/manifest.json" />
-          <meta name="msapplication-TileColor" content="#880a4d" />
+          <meta name="msapplication-TileColor" content="#32376F" />
           <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
-          <meta name="theme-color" content="#880a4d" />
+          <meta name="theme-color" content="#32376F" />
         </Head>
-        <body className="min-h-screen w-full overflow-x-hidden scrollbar-thin">
+        <body className="min-h-screen text-primary-dark w-full overflow-x-hidden scrollbar-thin">
           <Main />
           <NextScript />
         </body>
