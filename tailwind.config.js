@@ -23,6 +23,7 @@ module.exports = {
       },
       backgroundImage: {
         circuit_bg: "url(/circuit_bg.png)",
+        grdt: "linear-gradient(to bottom right, #22CBD5 50%,#986DF6)",
       },
       colors: {
         primary: {

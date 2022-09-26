@@ -91,7 +91,7 @@ class MyDocument extends Document {
           <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
           <meta name="theme-color" content="#32376F" />
         </Head>
-        <body className="min-h-screen text-primary-dark w-full overflow-x-hidden scrollbar-thin">
+        <body className="min-h-screen text-primary-dark w-full font-techathonRegular overflow-x-hidden scrollbar-thin">
           <Main />
           <NextScript />
         </body>

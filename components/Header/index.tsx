@@ -10,8 +10,8 @@ const Header = () => {
     setNavOpen((prev) => !prev);
   };
   return (
-    <header className="sticky top-2 left-0 right-0 w-full border-b-[1px] border-b-secondary/90 bg-white z-[222222]">
-      <nav className="flex max-w-5xl px-5 py-3 xl:px-0 w-full justify-between items-center mx-auto">
+    <header className="fixed shadow top-0 h-16 left-0 right-0 w-full border-b-[1px] border-b-secondary/90 bg-white z-[222222]">
+      <nav className="h-full flex max-w-5xl px-5 py-3 xl:px-0 w-full justify-between items-center mx-auto">
         <Link href="/">
           <a className="relative w-28 h-6">
             <Image src="/logo.png" layout="fill" />
@@ -20,7 +20,7 @@ const Header = () => {
         <ul
           className={`flex gap-5 fixed bg-primary/90 text-white backdrop-blur-sm flex-col right-0 top-0 h-full w-[50%] sm:w-[40%] shadow-md p-8 py-10 ${
             navOpen ? "clip-100" : "clip-0 md:clip-100"
-          } duration-500 md:relative md:bg-transparent md:text-primary-dark md:flex-row md:p-0`}
+          } duration-500 md:relative md:bg-transparent md:text-primary-dark md:flex-row md:p-0 md:items-center`}
         >
           {NAV_LINKS.map((link) => (
             <li className="w-full group" key={link.text}>
