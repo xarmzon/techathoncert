@@ -24,4 +24,25 @@
   .clip-100 {
     clip-path: polygon(100% 0, 0 0, 0 100%, 100% 100%);
   }
+  .loading-text {
+    animation: changeBackground 1s linear infinite alternate;
+  }
+}
+
+@keyframes changeBackground {
+  from {
+    background: linear-gradient(to top right, #22cbd5, #986df6);
+    background-clip: text;
+    color: transparent;
+  }
+  50% {
+    background: linear-gradient(to bottom right, #22cbd5, #32376f);
+    background-clip: text;
+    color: transparent;
+  }
+  to {
+    background: linear-gradient(to top left, #32376f, #986df6);
+    background-clip: text;
+    color: transparent;
+  }
 }

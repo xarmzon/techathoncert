@@ -6,14 +6,21 @@ import React, { ChangeEvent, FormEvent, useState } from "react";
 const MainPage: NextPage = () => {
   const [idNumber, setIdNumber] = useState<string>("");
   const [error, setError] = useState<string>("");
+  const [mentee, setMentee] = useState<any>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const update = (e: ChangeEvent<HTMLInputElement>) => {
     setIdNumber((prev) => e.target.value);
   };
-  const action = async (e: FormEvent) => {};
+  const action = async (e: FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 3000);
+  };
   return (
     <>
-      {/* <Loader /> */}
+      {loading && <Loader />}
       <div className="my-8 xl:my-20 max-w-5xl flex flex-col-reverse md:flex-row mx-auto rounded-lg overflow-hidden shadow-lg backdrop-blur-[2px]">
         <section className="p-5 lg:p-8 text-left flex-1">
           <h3 className="text-center text-sm xl:text-base">
@@ -25,6 +32,7 @@ const MainPage: NextPage = () => {
             className="w-full flex flex-col space-y-5 mt-5"
           >
             <input
+              required
               type="text"
               placeholder="Identification Number"
               className={`w-full py-3 rounded-md border-[1px] ${
