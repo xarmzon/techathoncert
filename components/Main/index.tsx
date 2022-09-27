@@ -12,7 +12,7 @@ const MainPage: NextPage = () => {
   const [mentee, setMentee] = useState<any>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const elRef = useRef<HTMLDivElement>(null);
-  const { convert, imageLoading, imageData } = useHTMLToImage({ ref: elRef });
+  const { convert, imageData } = useHTMLToImage({ ref: elRef });
   const update = (e: ChangeEvent<HTMLInputElement>) => {
     setIdNumber((prev) => e.target.value);
   };
@@ -26,9 +26,23 @@ const MainPage: NextPage = () => {
   };
   return (
     <>
+      <div
+        className={`z-[-99999999999] top-[80px] left-1/2 -translate-x-1/2 fixed w-[700px] ${
+          loading ? "block" : "hidden"
+        }`}
+      >
+        <Certificate
+          ref={elRef}
+          fullName="Adelola Kayode Samson"
+          userID="TECH-03-4323232323"
+          track="Frontend Development"
+          dateIssued="September 6, 2022"
+        />
+      </div>
+
       {loading && <Loader />}
       <div className="my-8 xl:my-20 max-w-5xl flex flex-col-reverse md:flex-row mx-auto rounded-lg overflow-hidden shadow-lg backdrop-blur-[2px]">
-        <section className="bg-white/40 p-5 lg:p-8 text-left flex-1 bg-cert_badge_g bg-left-top bg-no-repeat grid place-items-center bg-[length:10%_35%] sm:bg-[length:6%_30%] md:bg-[length:15%_25%]">
+        <section className="bg-white/40 p-5 lg:p-8 text-left flex-1 bg-cert_badge_g bg-left-top bg-no-repeat grid place-items-center bg-[length:10%_35%] sm:bg-[length:6%_30%] md:bg-[length:15%_25%] lg:bg-[length:65px_150px]">
           <div className="w-full">
             <h3 className="mb-5 text-center text-sm xl:text-base">
               Please enter the identification number for the certificate you are
@@ -64,15 +78,9 @@ const MainPage: NextPage = () => {
             {APP_NAME} Certification Verification
           </h1>
           <CertificateWrapper>
-            <div className={`${loading ? "block" : "hidden"}`}>
-              <Certificate
-                ref={elRef}
-                fullName="Adelola Kayode Samson"
-                track="Node JS"
-                dateIssued="September 6, 2022"
-              />
-            </div>
-            {imageData && <img src={imageData} />}
+            {imageData && (
+              <img src={imageData} className="md:max-w-[80%] md:mx-auto" />
+            )}
           </CertificateWrapper>
         </section>
       </div>
