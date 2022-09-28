@@ -4,3 +4,7 @@ export const DESCRIPTION =
 export const BASE_URL = "https://www.techathoncertificate.vercel.app";
 export const MAIN_SITE = "https://techathonian.com/";
 export const EMAIL = "hello@techathonian.com";
+export const MAX_UPLOAD_SIZE = {
+  size: 1,
+  type: "MB",
+};

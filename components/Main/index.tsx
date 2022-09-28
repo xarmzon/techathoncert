@@ -1,5 +1,7 @@
+import Button from "@components/Button";
 import Certificate from "@components/Certificate";
 import CertificateWrapper from "@components/Certificate/CertificateWrapper";
+import Input from "@components/Input";
 import Loader from "@components/Loader";
 import { APP_NAME } from "config";
 import useHTMLToImage from "hooks/useHTMLToImage";
@@ -52,24 +54,16 @@ const MainPage: NextPage = () => {
               onSubmit={action}
               className="w-full flex flex-col space-y-5 mt-5"
             >
-              <input
+              <Input
                 required
                 type="text"
                 placeholder="Identification Number"
-                className={`w-full py-3 rounded-md border-[1px] ${
-                  error.length
-                    ? "border-red-600 text-red-600 focus:ring-red-500"
-                    : "border-slate-200 focus:ring-secondary text-primary-dark"
-                } focus:border-transparent focus:outline-none duration-500`}
+                error={error}
                 onChange={update}
               />
-              <button
-                disabled={loading}
-                type="submit"
-                className="px-5 py-3 rounded-md bg-grdt text-white disabled:cursor-not-allowed"
-              >
+              <Button disabled={loading} type="submit">
                 Verify
-              </button>
+              </Button>
             </form>
           </div>
         </section>

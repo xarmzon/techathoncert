@@ -17,4 +17,8 @@ export const NAV_LINKS: TLink[] = [
     text: "Partners",
     url: "https://techathonian.com/#partners",
   },
+  {
+    text: "Upload",
+    url: "/upload",
+  },
 ];

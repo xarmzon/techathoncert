@@ -23,6 +23,7 @@ module.exports = {
       },
       backgroundImage: {
         grdt: "linear-gradient(to bottom right, #22CBD5 50%,#986DF6)",
+        grdt2: "linear-gradient(to top left, #22CBD5 50%,#986DF6)",
         cert_badge_g: "url(/cert_badge_g.png)",
         circuit_bg: "url(/circuit_bg.png)",
         cert_cover: "url(/techathon_certificate_cover.jpg)",
