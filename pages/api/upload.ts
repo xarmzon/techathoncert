@@ -103,7 +103,9 @@ const uploadCertificate = async (
   const sheets = await readSheetNames(certFile.path);
   console.log(sheets);
   const rows = await readXlsxFile(certFile.path);
-  console.log(rows[1]);
+  [rows[0]].map((row) => {
+    console.log(row);
+  });
   res
     .status(201)
     .json({ error: false, msg: "Certificate Uploaded Successfully" });
