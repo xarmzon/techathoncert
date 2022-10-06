@@ -25,7 +25,7 @@ async function verifyCertificate(
   if (!certificate) {
     return next(
       APIError.custom(
-        `No certificate found for a Mentee with the certificate number ${menteeID.toUpperCase()}`,
+        `No certificate found for a Mentee with the certificate number ${menteeID.toUpperCase()}. Please try again with a valid ID`,
         404
       )
     );
