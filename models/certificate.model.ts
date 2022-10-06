@@ -1,6 +1,6 @@
 import { Model, model, models, Schema } from "mongoose";
 
-interface ICertificate {
+export interface ICertificate {
   fullName: string;
   menteeID: string;
   track: string;

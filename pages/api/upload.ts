@@ -7,6 +7,7 @@ import nc, { NextHandler } from "next-connect";
 import multer, { diskStorage } from "multer";
 import { MAX_UPLOAD_SIZE } from "config";
 import readXlsxFile, { readSheetNames } from "read-excel-file/node";
+import CertificateModel, { ICertificate } from "models/certificate.model";
 
 interface ExtendedNextApiRequest extends NextApiRequest {
   file: Express.Multer.File;
@@ -60,11 +61,9 @@ const validator = async (
   const { pass } = req.body;
   if (!pass) {
     return next(APIError.badRequest("Upload Password is required"));
+  } else if (pass !== process.env.UPLOAD_PASS) {
+    return next(APIError.badRequest("Invalid Upload Password"));
   }
-
-  //  else if (pass !== process.env.UPLOAD_PASS) {
-  //   return next(APIError.badRequest("Invalid Upload Password"));
-  // }
   next();
 };
 
@@ -98,14 +97,32 @@ const uploadCertificate = async (
 ) => {
   await connectDB();
   const certFile = req.file;
-  // console.log(certFile);
-  //rmSync(resolve("public", "cert"), { recursive: true, force: true });
+
   const sheets = await readSheetNames(certFile.path);
-  console.log(sheets);
-  const rows = await readXlsxFile(certFile.path);
-  [rows[0]].map((row) => {
-    console.log(row);
+  const rows = await readXlsxFile(certFile.path, { sheet: sheets[1] });
+
+  const data: ICertificate[] = [];
+
+  rows.map((row, index) => {
+    const fullName = (row[0] as string).toUpperCase();
+    const track = (row[1] as string).toUpperCase();
+    const dateIssued = row[2] as string;
+    const menteeID =
+      `TM-${fullName.split(" ")[0].slice(0, 2)}${(
+        fullName.split(" ")[1] || "000000"
+      ).slice(0, 2)}`.toUpperCase() + `${index + 1}`.padStart(2, "0");
+    data.push({
+      fullName,
+      track,
+      dateIssued,
+      menteeID,
+    });
   });
+
+  await CertificateModel.deleteMany({});
+  await CertificateModel.create(data);
+
+  rmSync(resolve("public", "cert"), { recursive: true, force: true });
   res
     .status(201)
     .json({ error: false, msg: "Certificate Uploaded Successfully" });
