@@ -26,7 +26,7 @@ const MainPage: NextPage = () => {
     setLoading(true);
     try {
       const { data } = await api.post("/verify", { menteeID });
-      // console.log(data);
+      console.log(data);
       toast.success(data.msg);
     } catch (error) {
       // console.log(error);
