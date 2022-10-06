@@ -6,16 +6,17 @@ import { extname } from "path";
 
 const storage = diskStorage({
   destination: function (req, file, cb) {
-    if(process.env.NODE_ENV === "production"){
+    if (process.env.NODE_ENV === "production") {
       if (!existsSync("/temp/cert")) {
         mkdirSync("/temp/cert");
       }
-    }else{
+      cb(null, "/temp/cert");
+    } else {
       if (!existsSync("public/cert")) {
         mkdirSync("public/cert");
       }
+      cb(null, "public/cert");
     }
-    cb(null, "public/cert");
   },
   filename: function (req, file, cb) {
     const suffix = Date.now().toString(16);
