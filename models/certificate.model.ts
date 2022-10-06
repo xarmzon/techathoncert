@@ -36,5 +36,5 @@ const CertificateSchema = new Schema<ICertificate>(
 );
 
 const CertificateModel: Model<ICertificate, any, any, any, any> =
-  models.certificate || model("Certificate", CertificateSchema);
+  models.Certificate || model("Certificate", CertificateSchema);
 export default CertificateModel;

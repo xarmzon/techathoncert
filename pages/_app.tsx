@@ -7,8 +7,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <DefaultSeo {...NEXT_SEO} />
-
-      <Toaster />
+      <Toaster toastOptions={{ position: "bottom-center" }} />
       <Component {...pageProps} />
     </>
   );

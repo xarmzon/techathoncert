@@ -8,7 +8,7 @@ import { api } from "config/api";
 import useHTMLToImage from "hooks/useHTMLToImage";
 import { NextPage } from "next";
 import React, { useRef, ChangeEvent, FormEvent, useState } from "react";
-import toast from "react-hot-toast";
+import { toast } from "react-hot-toast";
 
 const MainPage: NextPage = () => {
   const [error, setError] = useState<string>("");
@@ -37,7 +37,6 @@ const MainPage: NextPage = () => {
       } else {
         toast.error(err.message || "An Error Occurred");
       }
-      //toast.error(error)
     } finally {
       setLoading(false);
     }
