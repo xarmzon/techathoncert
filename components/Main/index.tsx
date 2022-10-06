@@ -26,10 +26,10 @@ const MainPage: NextPage = () => {
     setLoading(true);
     try {
       const { data } = await api.post("/verify", { menteeID });
-      console.log(data);
+      // console.log(data);
       toast.success(data.msg);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       const err = error as any;
       const apiError = err.response?.data?.msg;
       if (apiError) {

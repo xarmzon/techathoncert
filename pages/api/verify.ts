@@ -23,7 +23,12 @@ async function verifyCertificate(
     menteeID: menteeID.toUpperCase(),
   });
   if (!certificate) {
-    return next(APIError.custom(`No certificate found for ${menteeID}`, 404));
+    return next(
+      APIError.custom(
+        `No certificate found for a Mentee with the certificate number ${menteeID.toUpperCase()}`,
+        404
+      )
+    );
   }
   res
     .status(200)
