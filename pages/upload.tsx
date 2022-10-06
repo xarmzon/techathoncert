@@ -5,9 +5,12 @@ import React, { ChangeEvent, FormEvent, useRef, useState } from "react";
 import { FaUpload } from "react-icons/fa";
 import Loader from "@components/Loader";
 import { MAX_UPLOAD_SIZE } from "config";
+import { api } from "config/api";
+import toast from "react-hot-toast";
 interface IError {
   file: string;
   password: string;
+  general: "";
 }
 
 const UploadPage = () => {
@@ -18,6 +21,7 @@ const UploadPage = () => {
   const [error, setError] = useState<IError>({
     file: "",
     password: "",
+    general: "",
   });
   const openBox = () => {
     if (inputRef.current) {
@@ -54,23 +58,33 @@ const UploadPage = () => {
         file: `Max file size is ${MAX_UPLOAD_SIZE.size}${MAX_UPLOAD_SIZE.type}`,
       }));
     }
-    const formData = new FormData(e.currentTarget);
-    // formData.append("file", file);
-    // formData.append("password", password);
-    console.log(formData);
+    const formData = new FormData();
+    formData.append("cert", file);
+    formData.append("pass", password);
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 2000);
+    try {
+      const { data } = await api.post("/upload", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      console.log(data.msg);
+      toast.success(data.msg);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading((prev) => false);
+    }
   };
   return (
     <Layout title="Upload Certificate <> Techathon">
       {loading && <Loader />}
-      <div className="rounded-md bg-white shadow-lg p-5 max-w-xl mx-auto">
+      <div className="rounded-md bg-white shadow-xl p-5 max-w-lg lg:p-10 mx-auto">
         <h1 className="text-center font-techathonMedium text-primary text-2xl">
           Upload Certificate Data
         </h1>
         <form
+          encType="multipart/form-data"
           onSubmit={upload}
           className="mt-2 flex flex-col space-y-3 items-center"
         >
@@ -83,18 +97,17 @@ const UploadPage = () => {
               Select file to upload
             </span>
           </div>
-          {file && (
-            <p
-              className={`!my-[4px] text-center text-sm italic line-clamp-2 ${
-                error.file ? "text-red-600" : "text-slate-400"
-              }`}
-            >
-              {file.name}
-              {error.file && (
-                <span className="block mt-2 text-xs">{error.file}</span>
-              )}
-            </p>
-          )}
+          <p
+            className={`!my-[4px] text-center text-sm italic line-clamp-2 ${
+              error.file ? "text-red-600" : "text-slate-400"
+            }`}
+          >
+            {file?.name || ""}
+            {error.file && (
+              <span className="block mt-4 text-xs">{error.file}</span>
+            )}
+          </p>
+
           <Input
             onChange={displayFileName}
             ref={inputRef}
