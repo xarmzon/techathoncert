@@ -32,5 +32,12 @@ async function verifyCertificate(
   }
   res
     .status(200)
-    .json({ msg: "Certificate Fetched Successfully", certificate });
+    .json({
+      msg: "Certificate Fetched Successfully",
+      certificate: {
+        ...certificate.toObject(),
+        __v: undefined,
+        _id: undefined,
+      },
+    });
 }
