@@ -68,10 +68,16 @@ const UploadPage = () => {
           "Content-Type": "multipart/form-data",
         },
       });
-      console.log(data.msg);
+     
       toast.success(data.msg);
     } catch (error) {
-      console.log(error);
+     const err = error as any;
+      const apiError = err.response?.data?.msg;
+      if (apiError) {
+        toast.error(apiError);
+      } else {
+        toast.error(err.message || "An Error Occurred");
+      }
     } finally {
       setLoading((prev) => false);
     }
