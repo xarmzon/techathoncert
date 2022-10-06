@@ -48,9 +48,7 @@ async function uploadCertificate(
   await CertificateModel.create(data);
 
   rmSync(resolve("public", "cert"), { recursive: true, force: true });
-  res
-    .status(201)
-    .json({ error: false, msg: "Certificate Uploaded Successfully" });
+  res.status(201).json({ msg: "Certificate Uploaded Successfully" });
 }
 
 export const config = {

@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import nc from "next-connect";
+import nc, { NextHandler } from "next-connect";
 import CertificateModel, { ICertificate } from "models/certificate.model";
 import { validator } from "api/validator.middleware";
 import APIError, { onError, onNoMatch } from "../../api/error.api";
@@ -12,10 +12,20 @@ export default nc({
   .use(validator("verify"))
   .post(verifyCertificate);
 
-async function verifyCertificate(req: NextApiRequest, res: NextApiResponse) {
+async function verifyCertificate(
+  req: NextApiRequest,
+  res: NextApiResponse,
+  next: NextHandler
+) {
   await connectDB();
-
+  const { menteeID }: { menteeID: string } = req.body;
+  const certificate = await CertificateModel.findOne({
+    menteeID: menteeID.toUpperCase(),
+  });
+  if (!certificate) {
+    return next(APIError.custom(`No certificate found for ${menteeID}`, 404));
+  }
   res
-    .status(201)
-    .json({ error: false, msg: "Certificate Uploaded Successfully" });
+    .status(200)
+    .json({ msg: "Certificate Fetched Successfully", certificate });
 }

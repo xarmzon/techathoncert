@@ -4,27 +4,43 @@ import CertificateWrapper from "@components/Certificate/CertificateWrapper";
 import Input from "@components/Input";
 import Loader from "@components/Loader";
 import { APP_NAME } from "config";
+import { api } from "config/api";
 import useHTMLToImage from "hooks/useHTMLToImage";
 import { NextPage } from "next";
 import React, { useRef, ChangeEvent, FormEvent, useState } from "react";
+import toast from "react-hot-toast";
 
 const MainPage: NextPage = () => {
-  const [idNumber, setIdNumber] = useState<string>("");
   const [error, setError] = useState<string>("");
-  const [mentee, setMentee] = useState<any>(null);
+  const [menteeID, setMenteeID] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const elRef = useRef<HTMLDivElement>(null);
   const { convert, imageData } = useHTMLToImage({ ref: elRef });
+
   const update = (e: ChangeEvent<HTMLInputElement>) => {
-    setIdNumber((prev) => e.target.value);
+    setMenteeID((prev) => e.target.value);
   };
+
   const action = async (e: FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    setTimeout(() => {
-      convert();
+    try {
+      const { data } = await api.post("/verify", { menteeID });
+      console.log(data);
+      toast.success(data.msg);
+    } catch (error) {
+      console.log(error);
+      const err = error as any;
+      const apiError = err.response?.data?.msg;
+      if (apiError) {
+        toast.error(apiError);
+      } else {
+        toast.error(err.message || "An Error Occurred");
+      }
+      //toast.error(error)
+    } finally {
       setLoading(false);
-    }, 5000);
+    }
   };
   return (
     <>
@@ -57,7 +73,8 @@ const MainPage: NextPage = () => {
               <Input
                 required
                 type="text"
-                placeholder="Identification Number"
+                value={menteeID}
+                placeholder="Mentee Identification Number"
                 error={error}
                 onChange={update}
               />

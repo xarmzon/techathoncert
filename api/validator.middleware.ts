@@ -30,10 +30,18 @@ export const validator =
         }
         break;
       case "verify":
-        const { menteeID } = req.body;
+        const { menteeID = "" }: { menteeID: string } = req.body;
         if (!menteeID) {
           return next(APIError.badRequest("MenteeID field is required"));
         }
+        if (!menteeID.toLowerCase().startsWith("tm-")) {
+          return next(
+            APIError.badRequest(
+              "Invalid MenteeID Supplied. Try again with a valid ID"
+            )
+          );
+        }
+
         break;
       default:
         return next(APIError.custom("Unknown Validator Type", 500));
