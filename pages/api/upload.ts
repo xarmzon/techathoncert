@@ -47,7 +47,13 @@ async function uploadCertificate(
   await CertificateModel.deleteMany({});
   await CertificateModel.create(data);
 
-  rmSync(resolve("public", "cert"), { recursive: true, force: true });
+  let path: string[] = [];
+  if (process.env.NODE_ENV === "production") {
+    path.push("temp", "cert");
+  } else {
+    path.push("public", "cert");
+  }
+  rmSync(resolve(...path), { recursive: true, force: true });
   res.status(201).json({ msg: "Certificate Uploaded Successfully" });
 }
 

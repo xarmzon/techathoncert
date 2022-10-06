@@ -6,8 +6,14 @@ import { extname } from "path";
 
 const storage = diskStorage({
   destination: function (req, file, cb) {
-    if (!existsSync("public/cert")) {
-      mkdirSync("public/cert");
+    if(process.env.NODE_ENV === "production"){
+      if (!existsSync("/temp/cert")) {
+        mkdirSync("/temp/cert");
+      }
+    }else{
+      if (!existsSync("public/cert")) {
+        mkdirSync("public/cert");
+      }
     }
     cb(null, "public/cert");
   },
