@@ -10,18 +10,24 @@ import { validator } from "api/validator.middleware";
 import { onError, onNoMatch } from "../../api/error.api";
 import { connectDB } from "../../config/db";
 
-const uploadCertificate = async (
+export default nc({
+  onError,
+  onNoMatch,
+})
+  .use(uploader)
+  .use(validator("upload"))
+  .post(uploadCertificate);
+
+async function uploadCertificate(
   req: ExtendedNextApiRequest,
   res: NextApiResponse
-) => {
+) {
   await connectDB();
   const certFile = req.file;
-
   const sheets = await readSheetNames(certFile.path);
   const rows = await readXlsxFile(certFile.path, { sheet: sheets[1] });
 
   const data: ICertificate[] = [];
-
   rows.map((row, index) => {
     const fullName = (row[0] as string).toUpperCase();
     const track = (row[1] as string).toUpperCase();
@@ -45,15 +51,7 @@ const uploadCertificate = async (
   res
     .status(201)
     .json({ error: false, msg: "Certificate Uploaded Successfully" });
-};
-
-export default nc({
-  onError,
-  onNoMatch,
-})
-  .use(uploader)
-  .use(validator("upload"))
-  .post(uploadCertificate);
+}
 
 export const config = {
   api: {
