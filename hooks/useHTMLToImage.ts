@@ -23,7 +23,7 @@ const useHTMLToImage = ({ ref }: UseHTMLToImageProps) => {
         });
     }
   }, [ref]);
-  return { convert, imageData, imageLoading: loading };
+  return { convert, imageData, imageLoading: loading, setImageData };
 };
 
 export default useHTMLToImage;

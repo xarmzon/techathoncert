@@ -6,6 +6,7 @@ import Loader from "@components/Loader";
 import { APP_NAME } from "config";
 import { api } from "config/api";
 import useHTMLToImage from "hooks/useHTMLToImage";
+import { ICertificate } from "models/certificate.model";
 import { NextPage } from "next";
 import React, { useRef, ChangeEvent, FormEvent, useState } from "react";
 import { toast } from "react-hot-toast";
@@ -14,9 +15,16 @@ const MainPage: NextPage = () => {
   const [error, setError] = useState<string>("");
   const [menteeID, setMenteeID] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
+  const [certificate, setCertificate] = useState<ICertificate>({
+    fullName: "",
+    menteeID: "",
+    track: "",
+    dateIssued: "",
+  });
   const elRef = useRef<HTMLDivElement>(null);
-  const { convert, imageData } = useHTMLToImage({ ref: elRef });
-
+  const { convert, imageData, imageLoading, setImageData } = useHTMLToImage({
+    ref: elRef,
+  });
   const update = (e: ChangeEvent<HTMLInputElement>) => {
     setMenteeID((prev) => e.target.value);
   };
@@ -26,10 +34,14 @@ const MainPage: NextPage = () => {
     setLoading(true);
     try {
       const { data } = await api.post("/verify", { menteeID });
-      console.log(data);
-      toast.success(data.msg);
+      setCertificate((prev) => ({
+        ...data.certificate,
+        updatedAt: undefined,
+        createdAt: undefined,
+      }));
+      convert();
     } catch (error) {
-      // console.log(error);
+      imageData && setImageData(null);
       const err = error as any;
       const apiError = err.response?.data?.msg;
       if (apiError) {
@@ -45,19 +57,19 @@ const MainPage: NextPage = () => {
     <>
       <div
         className={`z-[-99999999999] top-[80px] left-1/2 -translate-x-1/2 fixed w-[700px] ${
-          loading ? "block" : "hidden"
+          loading || imageLoading ? "block" : "hidden"
         }`}
       >
         <Certificate
           ref={elRef}
-          fullName="Adelola Kayode Samson"
-          userID="TECH-03-4323232323"
-          track="Frontend Development"
-          dateIssued="September 6, 2022"
+          fullName={certificate.fullName}
+          userID={certificate.menteeID}
+          track={certificate.track}
+          dateIssued={certificate.dateIssued}
         />
       </div>
 
-      {loading && <Loader />}
+      {(loading || imageLoading) && <Loader />}
       <div className="my-8 xl:my-20 max-w-5xl flex flex-col-reverse md:flex-row mx-auto rounded-lg overflow-hidden shadow-lg backdrop-blur-[2px]">
         <section className="bg-white/40 p-5 lg:p-8 text-left flex-1 bg-cert_badge_g bg-left-top bg-no-repeat grid place-items-center bg-[length:10%_35%] sm:bg-[length:6%_30%] md:bg-[length:15%_25%] lg:bg-[length:65px_150px]">
           <div className="w-full">
