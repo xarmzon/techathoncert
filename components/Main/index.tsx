@@ -23,10 +23,6 @@ const MainPage: NextPage = () => {
     track: "React JS",
     dateIssued: "22/11/2022",
   });
-  const elRef = useRef<HTMLDivElement>(null);
-  const { convert, imageData, imageLoading, setImageData } = useHTMLToImage({
-    ref: elRef,
-  });
 
   const [show, setShow] = useState<boolean>(false);
 
@@ -37,6 +33,7 @@ const MainPage: NextPage = () => {
   const action = async (e: FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    setShow(false);
     try {
       const { data } = await api.post("/verify", { menteeID });
       setCertificate((prev) => ({
@@ -44,9 +41,8 @@ const MainPage: NextPage = () => {
         updatedAt: undefined,
         createdAt: undefined,
       }));
-      convert();
+      setShow(true);
     } catch (error) {
-      imageData && setImageData(null);
       const err = error as any;
       const apiError = err.response?.data?.msg;
       if (apiError) {
@@ -60,7 +56,7 @@ const MainPage: NextPage = () => {
   };
   return (
     <>
-      <div
+      {/* <div
         className={`z-[-99999999999] top-[80px] left-1/2 -translate-x-1/2 fixed w-[700px] ${
           loading || imageLoading ? "block" : "hidden"
         }`}
@@ -72,9 +68,9 @@ const MainPage: NextPage = () => {
           track={certificate.track}
           dateIssued={certificate.dateIssued}
         />
-      </div>
+      </div> */}
 
-      {(loading || imageLoading) && <Loader />}
+      {loading && <Loader />}
       <div className="my-8 xl:my-20 max-w-5xl flex flex-col-reverse md:flex-row mx-auto rounded-lg overflow-hidden shadow-lg backdrop-blur-[2px]">
         <section className="bg-white/40 p-5 lg:p-8 text-left flex-1 bg-cert_badge_g bg-left-top bg-no-repeat grid place-items-center bg-[length:10%_35%] sm:bg-[length:6%_30%] md:bg-[length:15%_25%] lg:bg-[length:65px_150px]">
           <div className="w-full">
@@ -111,15 +107,16 @@ const MainPage: NextPage = () => {
           </CertificateWrapper> */}
         </section>
       </div>
-      <section
-        className={`z-[99999999999999999] fixed flex items-center justify-center inset-0 w-full h-full bg-slate-300/40 backdrop-blur-[4px]`}
-      >
-        <div className="absolute top-5 left-5">
-          <Button type="button" onClick={() => setShow((prev) => !prev)}>
-            Show
+      {show && (
+        <section
+          className={`z-[99999999999999999] fixed flex items-center justify-center inset-0 w-full h-full bg-slate-300/40 backdrop-blur-[4px]`}
+        >
+          <Button
+            className="h-10 w-10 rounded-full absolute top-5 right-5 flex items-center justify-center"
+            onClick={() => setShow(false)}
+          >
+            X
           </Button>
-        </div>
-        {show && (
           <div className="w-[95%] max-w-6xl h-[50%]">
             <PDFViewer className="w-full h-full">
               <PDFCertificate
@@ -130,8 +127,8 @@ const MainPage: NextPage = () => {
               />
             </PDFViewer>
           </div>
-        )}
-      </section>
+        </section>
+      )}
     </>
   );
 };

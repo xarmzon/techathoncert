@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   signature: {
-    width: 80,
+    width: 90,
   },
   link: {
     color: "#986DF6",
