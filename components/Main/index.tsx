@@ -10,21 +10,26 @@ import { ICertificate } from "models/certificate.model";
 import { NextPage } from "next";
 import React, { useRef, ChangeEvent, FormEvent, useState } from "react";
 import { toast } from "react-hot-toast";
+import { PDFViewer } from "@react-pdf/renderer";
+import PDFCertificate from "@components/Certificate/PDFCertificate";
 
 const MainPage: NextPage = () => {
   const [error, setError] = useState<string>("");
   const [menteeID, setMenteeID] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const [certificate, setCertificate] = useState<ICertificate>({
-    fullName: "",
-    menteeID: "",
-    track: "",
-    dateIssued: "",
+    fullName: "Adelola Kayode Samson",
+    menteeID: "TM-OLTA120",
+    track: "React JS",
+    dateIssued: "22/11/2022",
   });
   const elRef = useRef<HTMLDivElement>(null);
   const { convert, imageData, imageLoading, setImageData } = useHTMLToImage({
     ref: elRef,
   });
+
+  const [show, setShow] = useState<boolean>(false);
+
   const update = (e: ChangeEvent<HTMLInputElement>) => {
     setMenteeID((prev) => e.target.value);
   };
@@ -99,13 +104,34 @@ const MainPage: NextPage = () => {
           <h1 className="font-techathonMedium text-xl md:text-2xl lg:text-3xl lg:max-w-sm lg:mx-auto text-white tracking-wider">
             {APP_NAME} Certification Verification
           </h1>
-          <CertificateWrapper>
+          {/* <CertificateWrapper>
             {imageData && (
               <img src={imageData} className="md:max-w-[80%] md:mx-auto" />
             )}
-          </CertificateWrapper>
+          </CertificateWrapper> */}
         </section>
       </div>
+      <section
+        className={`z-[99999999999999999] fixed flex items-center justify-center inset-0 w-full h-full bg-slate-300/40 backdrop-blur-[4px]`}
+      >
+        <div className="absolute top-5 left-5">
+          <Button type="button" onClick={() => setShow((prev) => !prev)}>
+            Show
+          </Button>
+        </div>
+        {show && (
+          <div className="w-[95%] max-w-6xl h-[50%]">
+            <PDFViewer className="w-full h-full">
+              <PDFCertificate
+                fullName={certificate.fullName}
+                menteeID={certificate.menteeID}
+                track={certificate.track}
+                dateIssued={certificate.dateIssued}
+              />
+            </PDFViewer>
+          </div>
+        )}
+      </section>
     </>
   );
 };
