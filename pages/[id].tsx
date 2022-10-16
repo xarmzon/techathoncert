@@ -2,15 +2,15 @@ import Layout from "@pages/layout";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import Button from "@components/Button";
-import Input from "@components/Input";
 import Loader from "@components/Loader";
 import { APP_NAME } from "config";
 import { api } from "config/api";
 import { ICertificate } from "models/certificate.model";
-import { ChangeEvent, FormEvent, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { toast } from "react-hot-toast";
-import { PDFDownloadLink, PDFViewer } from "@react-pdf/renderer";
+import { PDFDownloadLink } from "@react-pdf/renderer";
 import PDFCertificate from "@components/Certificate/PDFCertificate";
+import Link from "next/link";
 
 const VerifyPage: NextPage = () => {
   const router = useRouter();
@@ -28,12 +28,12 @@ const VerifyPage: NextPage = () => {
     trainingName: "Back-End Development",
   });
 
-  const [show, setShow] = useState<boolean>(false);
+  const [show, setShow] = useState<"none" | "cert" | "verify" | "err">("none");
 
   useEffect(() => {
     const action = async () => {
       !loading && setLoading(true);
-      setShow(false);
+      setShow("none");
       try {
         const { data } = await api.post<{
           certificate: ICertificate;
@@ -44,14 +44,16 @@ const VerifyPage: NextPage = () => {
         toast.success(
           `Congratulations ${data.certificate.fullName}, your certificate is valid and your track is ${data.certificate.track}`
         );
-        setShow(true);
+        setShow("cert");
       } catch (error) {
         const err = error as any;
         const apiError = err.response?.data?.msg;
         if (apiError) {
           toast.error(apiError);
+          setShow("verify");
         } else {
           toast.error(err.message || "An Error Occurred");
+          setShow("err");
         }
       } finally {
         setLoading(false);
@@ -67,16 +69,15 @@ const VerifyPage: NextPage = () => {
     !menteeID && setMenteeID(() => (router.query?.id as string) || "");
   }, [router.query]);
 
-  console.log(router.query);
   return (
     <Layout title="Certificate Verification">
       {loading && <Loader />}
-      <section className="bg-grdt p-5 lg:p-8 text-center flex flex-col space-y-8">
+      <section className="container bg-grdt p-5 lg:p-8 text-center flex flex-col space-y-8">
         <h1 className="font-techathonMedium text-xl md:text-2xl lg:text-3xl lg:max-w-sm lg:mx-auto text-white tracking-wider">
           {APP_NAME} Certification Verification
         </h1>
-        {show && (
-          <div className="w-full flex flex-col space-y-5 items-center">
+        <div className="w-full flex flex-col space-y-5 items-center">
+          {show === "cert" && (
             <PDFDownloadLink
               document={
                 <PDFCertificate
@@ -97,9 +98,9 @@ const VerifyPage: NextPage = () => {
               {({ blob, url, loading, error }) => {
                 if (!loading && !error && blob) {
                   let reader = new FileReader();
-                  reader.readAsDataURL(blob);
+                  reader.readAsArrayBuffer(blob);
                   reader.onload = () => {
-                    // console.log(reader.result);
+                    console.log(reader.result);
                   };
                 }
 
@@ -124,8 +125,15 @@ const VerifyPage: NextPage = () => {
                 );
               }}
             </PDFDownloadLink>
-          </div>
-        )}
+          )}
+          {show === "verify" && (
+            <Link href="/">
+              <a className="text-center text-slate-50">
+                Verify another certificate
+              </a>
+            </Link>
+          )}
+        </div>
       </section>
     </Layout>
   );

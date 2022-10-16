@@ -1,17 +1,34 @@
 import { NAV_LINKS } from "config/constants";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { BiMenuAltRight, BiX } from "react-icons/bi";
 
 const Header = () => {
   const [navOpen, setNavOpen] = useState<boolean>(false);
+  const navRef = useRef<HTMLElement | null>(null);
   const toggleNav = () => {
     setNavOpen((prev) => !prev);
   };
+
+  useEffect(() => {
+    const clickOutside = (e: Event) => {
+      console.log(window.innerWidth);
+      !navRef.current?.contains(e.target as Node) &&
+        window.innerWidth < 768 &&
+        navOpen &&
+        setNavOpen((prev) => false);
+    };
+    window.addEventListener("click", clickOutside);
+    return () => window.removeEventListener("click", clickOutside);
+  }, []);
+
   return (
     <header className="fixed shadow top-0 h-16 left-0 right-0 w-full border-b-2 border-b-secondary/90 bg-white z-[22]">
-      <nav className="h-full flex max-w-5xl px-5 py-3 xl:px-0 w-full justify-between items-center mx-auto">
+      <nav
+        ref={navRef}
+        className="h-full flex max-w-5xl px-5 py-3 xl:px-0 w-full justify-between items-center mx-auto"
+      >
         <Link href="https://techathonian.com/">
           <a className="relative w-28 h-6">
             <Image src="/logo.png" layout="fill" />
@@ -23,7 +40,7 @@ const Header = () => {
           } duration-500 md:relative md:bg-transparent md:text-primary-dark md:flex-row md:p-0 md:items-center`}
         >
           {NAV_LINKS.map((link) => (
-            <li className="w-full group" key={link.text}>
+            <li onClick={toggleNav} className="w-full group" key={link.text}>
               <Link href={link.url}>
                 <a className="block h-full group-hover:pl-2 md:group-hover:pl-0 group-hover:text-secondary md:group-hover:text-primary md:group-hover:underline duration-500">
                   {link.text}
