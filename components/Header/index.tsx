@@ -20,7 +20,7 @@ const Header = () => {
     };
     window.addEventListener("click", clickOutside);
     return () => window.removeEventListener("click", clickOutside);
-  }, []);
+  }, [navOpen]);
 
   return (
     <header className="fixed shadow top-0 h-16 left-0 right-0 w-full border-b-2 border-b-secondary/90 bg-white z-[22]">
