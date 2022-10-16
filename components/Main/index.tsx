@@ -37,11 +37,15 @@ const MainPage: NextPage = () => {
     setShow(false);
     setCertImgData("");
     try {
-      const { data } = await api.post("/verify", { menteeID });
+      const { data } = await api.post<{
+        certificate: ICertificate;
+      }>("/verify", { menteeID });
       setCertificate((prev) => ({
         ...data.certificate,
       }));
-      toast.success("Congratulations, your certificate is valid");
+      toast.success(
+        `Congratulations ${data.certificate.fullName}, your certificate is valid and your track is ${data.certificate.track}`
+      );
       setShow(true);
     } catch (error) {
       const err = error as any;
