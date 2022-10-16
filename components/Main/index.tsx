@@ -5,7 +5,7 @@ import { APP_NAME } from "config";
 import { api } from "config/api";
 import { ICertificate } from "models/certificate.model";
 import { NextPage } from "next";
-import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import { toast } from "react-hot-toast";
 import { PDFDownloadLink, PDFViewer } from "@react-pdf/renderer";
 import PDFCertificate from "@components/Certificate/PDFCertificate";
