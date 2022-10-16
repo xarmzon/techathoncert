@@ -6,7 +6,6 @@ import {
   View,
   StyleSheet,
   Font,
-  Link,
 } from "@react-pdf/renderer";
 import { APP_NAME, BASE_URL } from "config";
 import { ICertificate } from "models/certificate.model";
@@ -41,26 +40,26 @@ const styles = StyleSheet.create({
     marginTop: 15,
   },
   logo: {
-    width: 180,
+    width: 150,
   },
   heading1: {
     fontFamily: "techathonMedium",
-    fontSize: 50,
+    fontSize: 42,
     color: "#32376F",
     marginBottom: 8,
   },
   heading2: {
     fontFamily: "techathonMedium",
-    fontSize: 30,
+    fontSize: 25,
     color: "#32376F",
     marginBottom: 8,
   },
   heading3: {
     fontFamily: "techathonRegular",
     color: "#32376F",
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: "bold",
-    marginBottom: -5,
+    marginBottom: 9,
   },
   heading4: {
     textDecoration: "underline",
@@ -68,11 +67,11 @@ const styles = StyleSheet.create({
   text: {
     fontFamily: "techathonRegular",
     color: "#32376F",
-    fontSize: 18,
+    fontSize: 16,
     marginBottom: 8,
   },
   text2: {
-    fontSize: 16,
+    fontSize: 14,
     marginBottom: 3,
   },
   skills: {
@@ -82,13 +81,14 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   skillText: {
-    fontSize: 16,
+    fontSize: 14,
   },
   signers: {
     maxWidth: "85%",
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
+    marginTop: 7,
   },
   signerWrapper: {
     display: "flex",
@@ -99,10 +99,10 @@ const styles = StyleSheet.create({
   },
   signerName: {
     fontFamily: "techathonMedium",
-    fontSize: 19,
+    fontSize: 17,
   },
   signerPost: {
-    fontSize: 16,
+    fontSize: 14,
   },
   signature: {
     width: 90,
@@ -147,14 +147,18 @@ const PDFCertificate = (props: PDFCertificateProps) => {
               <Text style={[styles.text, styles.heading4]}>
                 Technical Skills
               </Text>
-              {technicalSkills.map((skill) => (
-                <Text style={[styles.text, styles.skillText]}>{skill}</Text>
+              {technicalSkills.map((skill, i) => (
+                <Text key={skill + i} style={[styles.text, styles.skillText]}>
+                  {skill}
+                </Text>
               ))}
             </View>
             <View>
               <Text style={[styles.text, styles.heading4]}>Soft Skills</Text>
-              {softSkills.map((skill) => (
-                <Text style={[styles.text, styles.skillText]}>{skill}</Text>
+              {softSkills.map((skill, i) => (
+                <Text key={skill + i} style={[styles.text, styles.skillText]}>
+                  {skill}
+                </Text>
               ))}
             </View>
           </View>

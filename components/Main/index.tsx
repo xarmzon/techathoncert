@@ -5,16 +5,15 @@ import { APP_NAME } from "config";
 import { api } from "config/api";
 import { ICertificate } from "models/certificate.model";
 import { NextPage } from "next";
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
-import { PDFViewer } from "@react-pdf/renderer";
+import { PDFDownloadLink, PDFViewer } from "@react-pdf/renderer";
 import PDFCertificate from "@components/Certificate/PDFCertificate";
 
 const MainPage: NextPage = () => {
   const [error, setError] = useState<string>("");
   const [menteeID, setMenteeID] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
-  const [showDownload, setShowDownload] = useState<boolean>(false);
   const [certImgData, setCertImgData] = useState<string>("");
   const [certificate, setCertificate] = useState<ICertificate>({
     fullName: "Adelola Kayode Samson",
@@ -41,9 +40,8 @@ const MainPage: NextPage = () => {
       const { data } = await api.post("/verify", { menteeID });
       setCertificate((prev) => ({
         ...data.certificate,
-        updatedAt: undefined,
-        createdAt: undefined,
       }));
+      toast.success("Congratulations, your certificate is valid");
       setShow(true);
     } catch (error) {
       const err = error as any;
@@ -57,6 +55,7 @@ const MainPage: NextPage = () => {
       setLoading(false);
     }
   };
+
   return (
     <>
       {loading && <Loader />}
@@ -89,22 +88,60 @@ const MainPage: NextPage = () => {
           <h1 className="font-techathonMedium text-xl md:text-2xl lg:text-3xl lg:max-w-sm lg:mx-auto text-white tracking-wider">
             {APP_NAME} Certification Verification
           </h1>
-          {/* <CertificateWrapper>
-            {imageData && (
-              <img src={imageData} className="md:max-w-[80%] md:mx-auto" />
-            )}
-          </CertificateWrapper> */}
-          {certImgData && (
+          {show && (
             <div className="w-full flex flex-col space-y-5 items-center">
-              <img src={certImgData} className="md:max-w-[80%] md:mx-auto" />
-              <div className="">
-                <Button>Download</Button>
-              </div>
+              <PDFDownloadLink
+                document={
+                  <PDFCertificate
+                    fullName={certificate.fullName}
+                    menteeID={certificate.menteeID}
+                    track={certificate.track}
+                    trainingName={certificate.trainingName}
+                    technicalSkills={certificate.technicalSkills}
+                    softSkills={certificate.softSkills}
+                    dateIssued={certificate.dateIssued}
+                  />
+                }
+                fileName={`${APP_NAME}_${certificate.fullName
+                  .toLowerCase()
+                  .split(" ")
+                  .join("_")}_${menteeID}_certificate.pdf`.toUpperCase()}
+              >
+                {({ blob, url, loading, error }) => {
+                  if (!loading && !error && blob) {
+                    let reader = new FileReader();
+                    reader.readAsDataURL(blob);
+                    reader.onload = () => {
+                      // console.log(reader.result);
+                    };
+                  }
+
+                  return loading ? (
+                    <p className="my-5 text-slate-100 italic">
+                      Loading Certificate...
+                    </p>
+                  ) : error ? (
+                    <p className="my-5 text-red-200 italic">
+                      Error loading the certificate. Please try again
+                    </p>
+                  ) : (
+                    <>
+                      {/* <img
+                          src={blob}
+                          className="md:max-w-[80%] md:mx-auto"
+                        /> */}
+                      <Button className="bg-gradient-to-b !text-primary py-2 mt-3 from-slate-100 to-slate-300">
+                        Download
+                      </Button>
+                    </>
+                  );
+                }}
+              </PDFDownloadLink>
             </div>
           )}
         </section>
       </div>
-      {show && (
+      {certImgData && (
         <section
           className={`z-[99999999999999999] fixed flex items-center justify-center inset-0 w-full h-full bg-slate-300/40 backdrop-blur-[4px]`}
         >
