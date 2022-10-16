@@ -13,7 +13,6 @@ const Header = () => {
 
   useEffect(() => {
     const clickOutside = (e: Event) => {
-      console.log(window.innerWidth);
       !navRef.current?.contains(e.target as Node) &&
         window.innerWidth < 768 &&
         navOpen &&
