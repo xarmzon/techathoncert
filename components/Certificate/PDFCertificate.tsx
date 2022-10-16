@@ -12,9 +12,6 @@ import { APP_NAME, BASE_URL } from "config";
 import { ICertificate } from "models/certificate.model";
 import React from "react";
 
-const technical_skills: string[] = ["HTML", "CSS", "JavaScript"];
-const soft_skills: string[] = ["Teamwork", "Communication", "Time Management"];
-
 Font.register({
   family: "techathonRegular",
   src: "/fonts/Geomanist-Regular.woff",
@@ -36,7 +33,7 @@ const styles = StyleSheet.create({
     bottom: "0",
   },
   container: {
-    padding: 48,
+    padding: 80,
     paddingBottom: 8,
   },
   information: {
@@ -116,7 +113,15 @@ const styles = StyleSheet.create({
 });
 interface PDFCertificateProps extends ICertificate {}
 const PDFCertificate = (props: PDFCertificateProps) => {
-  const { fullName, menteeID, track, dateIssued } = props;
+  const {
+    fullName,
+    menteeID,
+    track,
+    dateIssued,
+    technicalSkills,
+    softSkills,
+    trainingName,
+  } = props;
   return (
     <Document
       title={`${APP_NAME}_${fullName
@@ -134,7 +139,7 @@ const PDFCertificate = (props: PDFCertificateProps) => {
             <Text style={styles.text}>This is to Certify that</Text>
             <Text style={styles.heading2}>{fullName}</Text>
             <Text style={styles.text}>has successfully completed</Text>
-            <Text style={styles.heading2}>{track}</Text>
+            <Text style={styles.heading2}>{trainingName}</Text>
             <Text style={styles.heading3}>The Programme includes</Text>
           </View>
           <View style={styles.skills}>
@@ -142,13 +147,13 @@ const PDFCertificate = (props: PDFCertificateProps) => {
               <Text style={[styles.text, styles.heading4]}>
                 Technical Skills
               </Text>
-              {technical_skills.map((skill) => (
+              {technicalSkills.map((skill) => (
                 <Text style={[styles.text, styles.skillText]}>{skill}</Text>
               ))}
             </View>
             <View>
               <Text style={[styles.text, styles.heading4]}>Soft Skills</Text>
-              {soft_skills.map((skill) => (
+              {softSkills.map((skill) => (
                 <Text style={[styles.text, styles.skillText]}>{skill}</Text>
               ))}
             </View>
@@ -172,12 +177,12 @@ const PDFCertificate = (props: PDFCertificateProps) => {
             </View>
           </View>
           <View>
-            <Text style={[styles.text, styles.text2, { textAlign: "right" }]}>
+            <Text style={[styles.text, styles.text2]}>
               <Text style={{ fontFamily: "techathonMedium" }}>Issued On:</Text>{" "}
               {dateIssued}
             </Text>
           </View>
-          <Text style={[styles.text, { fontSize: 14, marginTop: 5 }]}>
+          <Text style={[styles.text, { fontSize: 12, marginTop: 5 }]}>
             Verify this Proof of Completion by visiting{" "}
             <Text style={styles.link}>{`${BASE_URL}/${menteeID}`}</Text>
           </Text>

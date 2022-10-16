@@ -28,10 +28,14 @@ async function uploadCertificate(
   const rows = await readXlsxFile(certFile.path, { sheet: sheets[1] });
 
   const data: ICertificate[] = [];
+
   rows.map((row, index) => {
     const fullName = (row[0] as string).toUpperCase();
     const track = (row[1] as string).toUpperCase();
     const dateIssued = row[2] as string;
+    const trainingName = row[3] as string;
+    const technicalSkills = (row[4] as string).split(",");
+    const softSkills = (row[5] as string).split(",");
     const menteeID =
       `TM-${fullName.split(" ")[0].slice(0, 2)}${(
         fullName.split(" ")[1] || "000000"
@@ -41,6 +45,9 @@ async function uploadCertificate(
       track,
       dateIssued,
       menteeID,
+      softSkills,
+      technicalSkills,
+      trainingName,
     });
   });
 

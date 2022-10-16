@@ -1,14 +1,11 @@
 import Button from "@components/Button";
-import Certificate from "@components/Certificate";
-import CertificateWrapper from "@components/Certificate/CertificateWrapper";
 import Input from "@components/Input";
 import Loader from "@components/Loader";
 import { APP_NAME } from "config";
 import { api } from "config/api";
-import useHTMLToImage from "hooks/useHTMLToImage";
 import { ICertificate } from "models/certificate.model";
 import { NextPage } from "next";
-import React, { useRef, ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import { toast } from "react-hot-toast";
 import { PDFViewer } from "@react-pdf/renderer";
 import PDFCertificate from "@components/Certificate/PDFCertificate";
@@ -17,11 +14,16 @@ const MainPage: NextPage = () => {
   const [error, setError] = useState<string>("");
   const [menteeID, setMenteeID] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
+  const [showDownload, setShowDownload] = useState<boolean>(false);
+  const [certImgData, setCertImgData] = useState<string>("");
   const [certificate, setCertificate] = useState<ICertificate>({
     fullName: "Adelola Kayode Samson",
     menteeID: "TM-OLTA120",
     track: "React JS",
     dateIssued: "22/11/2022",
+    softSkills: ["Teamwork", "Communication", "Time Management"],
+    technicalSkills: ["HTML", "CSS", "JavaScript"],
+    trainingName: "Back-End Development",
   });
 
   const [show, setShow] = useState<boolean>(false);
@@ -34,6 +36,7 @@ const MainPage: NextPage = () => {
     e.preventDefault();
     setLoading(true);
     setShow(false);
+    setCertImgData("");
     try {
       const { data } = await api.post("/verify", { menteeID });
       setCertificate((prev) => ({
@@ -56,20 +59,6 @@ const MainPage: NextPage = () => {
   };
   return (
     <>
-      {/* <div
-        className={`z-[-99999999999] top-[80px] left-1/2 -translate-x-1/2 fixed w-[700px] ${
-          loading || imageLoading ? "block" : "hidden"
-        }`}
-      >
-        <Certificate
-          ref={elRef}
-          fullName={certificate.fullName}
-          userID={certificate.menteeID}
-          track={certificate.track}
-          dateIssued={certificate.dateIssued}
-        />
-      </div> */}
-
       {loading && <Loader />}
       <div className="my-8 xl:my-20 max-w-5xl flex flex-col-reverse md:flex-row mx-auto rounded-lg overflow-hidden shadow-lg backdrop-blur-[2px]">
         <section className="bg-white/40 p-5 lg:p-8 text-left flex-1 bg-cert_badge_g bg-left-top bg-no-repeat grid place-items-center bg-[length:10%_35%] sm:bg-[length:6%_30%] md:bg-[length:15%_25%] lg:bg-[length:65px_150px]">
@@ -105,6 +94,14 @@ const MainPage: NextPage = () => {
               <img src={imageData} className="md:max-w-[80%] md:mx-auto" />
             )}
           </CertificateWrapper> */}
+          {certImgData && (
+            <div className="w-full flex flex-col space-y-5 items-center">
+              <img src={certImgData} className="md:max-w-[80%] md:mx-auto" />
+              <div className="">
+                <Button>Download</Button>
+              </div>
+            </div>
+          )}
         </section>
       </div>
       {show && (
@@ -123,6 +120,9 @@ const MainPage: NextPage = () => {
                 fullName={certificate.fullName}
                 menteeID={certificate.menteeID}
                 track={certificate.track}
+                trainingName={certificate.trainingName}
+                technicalSkills={certificate.technicalSkills}
+                softSkills={certificate.softSkills}
                 dateIssued={certificate.dateIssued}
               />
             </PDFViewer>
