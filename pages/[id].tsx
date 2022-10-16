@@ -11,7 +11,7 @@ import { toast } from "react-hot-toast";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import PDFCertificate from "@components/Certificate/PDFCertificate";
 import Link from "next/link";
-
+import { pdfToPng } from "pdf-to-png-converter";
 const VerifyPage: NextPage = () => {
   const router = useRouter();
   const [menteeID, setMenteeID] = useState<string>(
@@ -100,7 +100,10 @@ const VerifyPage: NextPage = () => {
                   let reader = new FileReader();
                   reader.readAsArrayBuffer(blob);
                   reader.onload = () => {
-                    console.log(reader.result);
+                    // console.log(reader.result);
+                    // pdfToPng(reader.result!).then((res) => {
+                    //   console.log(res);
+                    // });
                   };
                 }
 
