@@ -96,17 +96,7 @@ const VerifyPage: NextPage = () => {
                 .join("_")}_${menteeID}_certificate.pdf`.toUpperCase()}
             >
               {({ blob, url, loading, error }) => {
-                if (!loading && !error && blob) {
-                  let reader = new FileReader();
-                  reader.readAsArrayBuffer(blob);
-                  reader.onload = () => {
-                    // console.log(reader.result);
-                    // pdfToPng(reader.result!).then((res) => {
-                    //   console.log(res);
-                    // });
-                  };
-                }
-
+               
                 return loading ? (
                   <p className="my-5 text-slate-100 italic">
                     Loading Certificate...
@@ -117,10 +107,7 @@ const VerifyPage: NextPage = () => {
                   </p>
                 ) : (
                   <>
-                    {/* <img
-                          src={blob}
-                          className="md:max-w-[80%] md:mx-auto"
-                        /> */}
+                  
                     <Button className="bg-gradient-to-b !text-primary py-2 mt-3 from-slate-100 to-slate-300">
                       Download
                     </Button>

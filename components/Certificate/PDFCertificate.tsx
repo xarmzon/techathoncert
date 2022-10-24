@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
   },
   heading1: {
     fontFamily: "techathonMedium",
-    fontSize: 42,
+    fontSize: 43,
     color: "#32376F",
     marginBottom: 8,
   },
@@ -57,12 +57,13 @@ const styles = StyleSheet.create({
   heading3: {
     fontFamily: "techathonRegular",
     color: "#32376F",
-    fontSize: 18,
+    fontSize: 17,
     fontWeight: "bold",
     marginBottom: 9,
   },
   heading4: {
-    textDecoration: "underline",
+    // textDecoration: "underline",
+    marginBottom: 11,
   },
   text: {
     fontFamily: "techathonRegular",
@@ -71,7 +72,7 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   text2: {
-    fontSize: 14,
+    fontSize: 12,
     marginBottom: 3,
   },
   skills: {
@@ -186,7 +187,7 @@ const PDFCertificate = (props: PDFCertificateProps) => {
               {dateIssued}
             </Text>
           </View>
-          <Text style={[styles.text, { fontSize: 12, marginTop: 5 }]}>
+          <Text style={[styles.text, { fontSize: 9, marginTop: 5 }]}>
             Verify this Proof of Completion by visiting{" "}
             <Text style={styles.link}>{`${BASE_URL}/${menteeID}`}</Text>
           </Text>

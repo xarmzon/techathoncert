@@ -88,7 +88,7 @@ const MainPage: NextPage = () => {
             </form>
           </div>
         </section>
-        <section className="bg-grdt p-5 lg:p-8 text-center flex-[1.8]">
+        <section className="bg-grdt p-5 lg:p-8 text-center flex-[1.8] flex flex-col items-center justify-center space-y-5">
           <h1 className="font-techathonMedium text-xl md:text-2xl lg:text-3xl lg:max-w-sm lg:mx-auto text-white tracking-wider">
             {APP_NAME} Certification Verification
           </h1>
@@ -112,14 +112,6 @@ const MainPage: NextPage = () => {
                   .join("_")}_${menteeID}_certificate.pdf`.toUpperCase()}
               >
                 {({ blob, url, loading, error }) => {
-                  if (!loading && !error && blob) {
-                    let reader = new FileReader();
-                    reader.readAsDataURL(blob);
-                    reader.onload = () => {
-                      // console.log(reader.result);
-                    };
-                  }
-
                   return loading ? (
                     <p className="my-5 text-slate-100 italic">
                       Loading Certificate...
@@ -130,10 +122,6 @@ const MainPage: NextPage = () => {
                     </p>
                   ) : (
                     <>
-                      {/* <img
-                          src={blob}
-                          className="md:max-w-[80%] md:mx-auto"
-                        /> */}
                       <Button className="bg-gradient-to-b !text-primary py-2 mt-3 from-slate-100 to-slate-300">
                         Download
                       </Button>
