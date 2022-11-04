@@ -64,10 +64,10 @@ const styles = StyleSheet.create({
   },
   heading4: {
     fontFamily: "techathonMedium",
-     // opacity: 0.4,
+      opacity: 0.7,
     // textDecoration: "underline",
     marginBottom: 11,
-    fontWeight: 400,
+    fontWeight: 500,
   },
   text: {
     fontFamily: "techathonRegular",
