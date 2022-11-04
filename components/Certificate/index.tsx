@@ -33,7 +33,7 @@ const Certificate = forwardRef<HTMLDivElement, CertificateProps>(
               <p className="mb-1">The Programme includes</p>
               <div className="flex justify-between w-[68%]">
                 <div className="">
-                  <h4 className="font-semibold text-sm">Technical Skills</h4>
+                  <h4 className="font-extrabold text-sm">Technical Skills</h4>
                   <ul className="text-sm">
                     {technical_skills.map((skill) => (
                       <li key={skill}>{skill}</li>
@@ -41,7 +41,7 @@ const Certificate = forwardRef<HTMLDivElement, CertificateProps>(
                   </ul>
                 </div>
                 <div className="">
-                  <h4 className="font-semibold text-sm">Soft Skills</h4>
+                  <h4 className="font-extrabold text-sm">Soft Skills</h4>
                   <ul className="text-sm">
                     {soft_skills.map((skill) => (
                       <li key={skill}>{skill}</li>
