@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
   },
   heading4: {
     fontFamily: "techathonMedium",
-    opacity: 0.4,
+//     opacity: 0.4,
     // textDecoration: "underline",
     marginBottom: 11,
     fontWeight: 600,
