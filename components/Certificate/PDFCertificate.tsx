@@ -63,11 +63,11 @@ const styles = StyleSheet.create({
     //This is the original style for the texr 'The Programme includes'
   },
   heading4: {
-    fontFamily: "techathonRegular",
+    fontFamily: "techathonMedium",
      // opacity: 0.4,
     // textDecoration: "underline",
     marginBottom: 11,
-    fontWeight: 800,
+    fontWeight: 400,
   },
   text: {
     fontFamily: "techathonRegular",
