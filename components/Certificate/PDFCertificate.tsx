@@ -145,7 +145,7 @@ const PDFCertificate = (props: PDFCertificateProps) => {
             <Text style={styles.heading2}>{fullName}</Text>
             <Text style={styles.text}>has successfully completed</Text>
             <Text style={styles.heading2}>{trainingName}</Text>
-            <Text style={styles.heading4}>The Programme includes</Text>
+            <Text style={[styles.text, styles.heading4]}>The Programme includes</Text>
           </View>
           <View style={styles.skills}>
             <View>
