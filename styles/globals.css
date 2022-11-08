@@ -10,6 +10,14 @@
   font-family: "TechathonMedium";
   src: url("../public/fonts/Geomanist-Medium.woff");
 }
+@font-face {
+  font-family: "TechathonBold";
+  src: url("../public/fonts/Geomanist-Bold.woff");
+}
+@font-face {
+  font-family: "TechathonBook";
+  src: url("../public/fonts/Geomanist-Book.woff");
+}
 
 @layer base {
   #__next {
