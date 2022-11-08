@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     bottom: "0",
   },
   container: {
-    padding: 80,
+    padding: 70,
     paddingBottom: 8,
   },
   information: {
@@ -65,6 +65,15 @@ const styles = StyleSheet.create({
   },
   heading3: {
     fontFamily: "techathonRegular",
+    color: "#32376F",
+    fontSize: 17,
+    fontWeight: "bold",
+    marginBottom: 9,
+    //This is the original style for the texr 'The Programme includes'
+  },
+    menteeName: {
+    fontFamily: "techathonRegular",
+    textTransform:"capitalize",
     color: "#32376F",
     fontSize: 17,
     fontWeight: "bold",
@@ -155,8 +164,8 @@ const PDFCertificate = (props: PDFCertificateProps) => {
           <Image style={styles.logo} src="/logo.png" />
           <View style={styles.information}>
             <Text style={styles.heading1}>Certificate of Completion</Text>
-            <Text style={styles.text}>This is to Certify that</Text>
-            <Text style={styles.heading2}>{fullName}</Text>
+            <Text style={styles.text}>This is to certify that</Text>
+            <Text style={styles.menteeName}>{fullName}</Text>
             <Text style={styles.text}>has successfully completed</Text>
             <Text style={styles.heading2}>{trainingName}</Text>
             <Text style={[styles.text, styles.heading4]}>The Programme includes</Text>
