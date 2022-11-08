@@ -19,6 +19,14 @@ Font.register({
   family: "techathonMedium",
   src: "/fonts/Geomanist-Medium.woff",
 });
+Font.register({
+  family: "techathonBold",
+  src: "/fonts/Geomanist-Bold.woff",
+});
+Font.register({
+  family: "techathonBook",
+  src: "/fonts/Geomanist-Book.woff",
+});
 
 const styles = StyleSheet.create({
   page: {
@@ -43,14 +51,14 @@ const styles = StyleSheet.create({
     width: 150,
   },
   heading1: {
-    fontFamily: "techathonBold",
-    fontSize: 37,
+    fontFamily: "techathonMedium",
+    fontSize: 43,
     color: "#32376F",
     marginBottom: 8,
   },
   heading2: {
     fontFamily: "techathonMedium",
-    fontSize: 28,
+    fontSize: 25,
     color: "#32376F",
     marginBottom: 8,
   },
@@ -63,17 +71,16 @@ const styles = StyleSheet.create({
     //This is the original style for the texr 'The Programme includes'
   },
   heading4: {
-    fontFamily: "techathonBook",
-//       opacity: 0.9,
+    fontFamily: "techathonMedium",
+      opacity: 0.9,
     // textDecoration: "underline",
-    fontSize: 17,
     marginBottom: 11,
     fontWeight: 500,
   },
   text: {
     fontFamily: "techathonRegular",
     color: "#32376F",
-    fontSize: 18,
+    fontSize: 16,
     marginBottom: 8,
   },
   text2: {
@@ -87,8 +94,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   skillText: {
-    fontFamily: "techathonRegular",
-    fontSize: 17,
+    fontSize: 14,
   },
   signers: {
     maxWidth: "85%",
@@ -106,10 +112,9 @@ const styles = StyleSheet.create({
   },
   signerName: {
     fontFamily: "techathonMedium",
-    fontSize: 16,
+    fontSize: 17,
   },
   signerPost: {
-    fontFamily: "techathonBook",
     fontSize: 14,
   },
   signature: {
