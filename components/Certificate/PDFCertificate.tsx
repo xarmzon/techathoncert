@@ -51,14 +51,14 @@ const styles = StyleSheet.create({
     width: 150,
   },
   heading1: {
-    fontFamily: "techathonMedium",
-    fontSize: 43,
+    fontFamily: "techathonBold",
+    fontSize: 37,
     color: "#32376F",
     marginBottom: 8,
   },
   heading2: {
     fontFamily: "techathonMedium",
-    fontSize: 25,
+    fontSize: 28,
     color: "#32376F",
     marginBottom: 8,
   },
@@ -71,16 +71,17 @@ const styles = StyleSheet.create({
     //This is the original style for the texr 'The Programme includes'
   },
   heading4: {
-    fontFamily: "techathonMedium",
-      opacity: 0.9,
+    fontFamily: "techathonRegular",
+//       opacity: 0.9,
     // textDecoration: "underline",
+     fontSize: 18,
     marginBottom: 11,
     fontWeight: 500,
   },
   text: {
     fontFamily: "techathonRegular",
     color: "#32376F",
-    fontSize: 16,
+    fontSize: 18,
     marginBottom: 8,
   },
   text2: {
@@ -88,13 +89,16 @@ const styles = StyleSheet.create({
     marginBottom: 3,
   },
   skills: {
+    fontFamily: "techathonBook",
+    fontSize: 17,
     maxWidth: "75%",
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
   },
   skillText: {
-    fontSize: 14,
+    fontFamily: "techathonRegular",
+    fontSize: 17,
   },
   signers: {
     maxWidth: "85%",
@@ -112,9 +116,10 @@ const styles = StyleSheet.create({
   },
   signerName: {
     fontFamily: "techathonMedium",
-    fontSize: 17,
+    fontSize: 16,
   },
   signerPost: {
+    fontFamily: "techathonBook",
     fontSize: 14,
   },
   signature: {
@@ -196,7 +201,7 @@ const PDFCertificate = (props: PDFCertificateProps) => {
           <View>
             <Text style={[styles.text, styles.text2]}>
               <Text style={{ fontFamily: "techathonMedium" }}>Issued On:</Text>{" "}
-              {dateIssued}
+                 <Text style={{fontFamily: "techathonBook", fontSize: 12 }}> {dateIssued}</Text>
             </Text>
           </View>
           <Text style={[styles.text, { fontSize: 9, marginTop: 5 }]}>
