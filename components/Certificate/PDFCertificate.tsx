@@ -201,7 +201,7 @@ const PDFCertificate = (props: PDFCertificateProps) => {
           <View>
             <Text style={[styles.text, styles.text2]}>
               <Text style={{ fontFamily: "techathonMedium" }}>Issued On:</Text>{" "}
-                 <Text style={{fontFamily: "techathonBook", fontSize: 12 }}> {dateIssued}</Text>
+                {dateIssued}
             </Text>
           </View>
           <Text style={[styles.text, { fontSize: 9, marginTop: 5 }]}>
