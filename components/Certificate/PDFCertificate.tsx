@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     bottom: "0",
   },
   container: {
-    padding: 80,
+    padding: 80 80 0,
     paddingBottom: 8,
   },
   information: {
@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
     fontSize: 28,
     color: "#32376F",
     marginBottom: 8,
-        textTransform: "uppercase",
+        
 
   },
   heading3: {
@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     fontSize: 28,
 //     fontWeight: "bold",
     marginBottom: 9,
-    textTransform: "capitalize",
+    textTransform: "lowercase",
 
     //This is the original style for the texr 'The Programme includes'
   },
