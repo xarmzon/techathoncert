@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     fontSize: 28,
 //     fontWeight: "bold",
     marginBottom: 9,
-    textTransform: "lowercase",
+    textTransform: "capitalize",
 
     //This is the original style for the texr 'The Programme includes'
   },
@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
-    marginTop: 7,
+    marginTop: 4,
   },
   signerWrapper: {
     display: "flex",
