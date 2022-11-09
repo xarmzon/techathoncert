@@ -20,6 +20,8 @@ module.exports = {
       fontFamily: {
         techathonRegular: ["TechathonRegular", "sans-serif"],
         techathonMedium: ["TechathonMedium", "sans-serif"],
+        techathonRegular: ["TechathonBook", "sans-serif"],
+        techathonMedium: ["TechathonBold", "sans-serif"],
       },
       backgroundImage: {
         grdt: "linear-gradient(to bottom right, #22CBD5 50%,#986DF6)",
