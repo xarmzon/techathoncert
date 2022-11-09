@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
   },
   heading1: {
     fontFamily: "techathonBold",
-    fontSize: 37,
+    fontSize:32,
     color: "#32376F",
     marginBottom: 8,
     textTransform: "uppercase",
