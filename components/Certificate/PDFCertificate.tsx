@@ -87,14 +87,14 @@ const styles = StyleSheet.create({
     fontFamily: "techathonRegular",
 //       opacity: 0.9,
     // textDecoration: "underline",
-     fontSize: 18,
+   
     marginBottom: 11,
     fontWeight: 500,
   },
   text: {
     fontFamily: "techathonRegular",
     color: "#32376F",
-    fontSize: 18,
+    fontSize: 16,
     marginBottom: 8,
   },
   text2: {
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
   },
   skills: {
     fontFamily: "techathonBook",
-    fontSize: 17,
+    
     maxWidth: "75%",
     display: "flex",
     flexDirection: "row",
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
   },
   skillText: {
     fontFamily: "techathonRegular",
-    fontSize: 17,
+    fontSize: 14,
   },
   signers: {
     maxWidth: "85%",
@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
   },
   signerName: {
     fontFamily: "techathonMedium",
-    fontSize: 16,
+    fontSize: 17,
   },
   signerPost: {
     fontFamily: "techathonBook",
