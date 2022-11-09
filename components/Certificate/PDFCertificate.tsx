@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     bottom: "0",
   },
   container: {
-    padding: 70,
+    padding: 80,
     paddingBottom: 8,
   },
   information: {
@@ -62,6 +62,8 @@ const styles = StyleSheet.create({
     fontSize: 28,
     color: "#32376F",
     marginBottom: 8,
+        textTransform: "uppercase",
+
   },
   heading3: {
     fontFamily: "techathonRegular",
@@ -73,11 +75,12 @@ const styles = StyleSheet.create({
   },
     menteeName: {
     fontFamily: "techathonMedium",
-    textTransform: "capitalize",
     color: "#32376F",
     fontSize: 28,
 //     fontWeight: "bold",
     marginBottom: 9,
+    textTransform: "capitalize",
+
     //This is the original style for the texr 'The Programme includes'
   },
   heading4: {
