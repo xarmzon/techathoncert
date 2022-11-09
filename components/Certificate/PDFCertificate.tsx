@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
   },
     menteeName: {
     fontFamily: "techathonMedium",
-    textTransform:"capitalize",
+    textTransform: "capitalize",
     color: "#32376F",
     fontSize: 28,
 //     fontWeight: "bold",
@@ -210,7 +210,7 @@ const PDFCertificate = (props: PDFCertificateProps) => {
           </View>
           <View>
             <Text style={[styles.text, styles.text2]}>
-              <Text style={{ fontFamily: "techathonMedium" }}>Issued On:</Text>{" "}
+              <Text style={{ fontFamily: "techathonMedium" }}>ISSUED ON:</Text>{" "}
                 {dateIssued}
             </Text>
           </View>
