@@ -72,11 +72,11 @@ const styles = StyleSheet.create({
     //This is the original style for the texr 'The Programme includes'
   },
     menteeName: {
-    fontFamily: "techathonRegular",
+    fontFamily: "techathonMedium",
     textTransform:"capitalize",
     color: "#32376F",
-    fontSize: 17,
-    fontWeight: "bold",
+    fontSize: 28,
+//     fontWeight: "bold",
     marginBottom: 9,
     //This is the original style for the texr 'The Programme includes'
   },
