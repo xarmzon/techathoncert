@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     bottom: "0",
   },
   container: {
-    padding: 80 80 0,
+    padding: 80,
     paddingBottom: 8,
   },
   information: {
@@ -52,14 +52,14 @@ const styles = StyleSheet.create({
   },
   heading1: {
     fontFamily: "techathonBold",
-    fontSize:32,
+    fontSize:37,
     color: "#32376F",
     marginBottom: 8,
     textTransform: "uppercase",
   },
   heading2: {
     fontFamily: "techathonMedium",
-    fontSize: 28,
+    fontSize: 25,
     color: "#32376F",
     marginBottom: 8,
         
