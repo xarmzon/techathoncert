@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     bottom: "0",
   },
   container: {
-    padding: 80,
+    padding: 90,
      paddingTop: 60,
     paddingBottom: 8,
   },
@@ -100,6 +100,7 @@ const styles = StyleSheet.create({
   },
   text2: {
     fontSize: 12,
+    marginTop: 15,
     marginBottom: 3,
   },
   skills: {
