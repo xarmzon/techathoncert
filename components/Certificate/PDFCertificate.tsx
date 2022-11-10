@@ -206,7 +206,7 @@ const PDFCertificate = (props: PDFCertificateProps) => {
               </Text>
             </View>
             <View style={styles.signerWrapper}>
-              <Image src="/signature_manager.svg" style={styles.signature} />
+              <Image src="/signature_manager.png" style={styles.signature} />
               <Text style={[styles.text, styles.signerName]}>Nkejah Ruth</Text>
               <Text style={[styles.text, styles.signerPost]}>
                 Learning Manager, Techathon Community
