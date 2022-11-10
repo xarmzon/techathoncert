@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
   },
   container: {
     padding: 90,
-     paddingTop: 60,
+     paddingTop: 70,
     paddingBottom: 8,
   },
   information: {
@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
   text2: {
     fontSize: 12,
     marginTop: 15,
-    marginBottom: 3,
+//     marginBottom: 3,
   },
   skills: {
     fontFamily: "techathonBook",
@@ -219,7 +219,7 @@ const PDFCertificate = (props: PDFCertificateProps) => {
                 {dateIssued}
             </Text>
           </View>
-          <Text style={[styles.text, { fontSize: 9, marginTop: 5 }]}>
+          <Text style={[styles.text, { fontSize: 9, marginTop: 3 }]}>
             Verify this Proof of Completion by visiting{" "}
             <Text style={styles.link}>{`${BASE_URL}/${menteeID}`}</Text>
           </Text>
