@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     bottom: "0",
   },
   container: {
-    padding: 100,
+    padding: 80,
     paddingBottom: 8,
   },
   information: {
