@@ -41,6 +41,7 @@ const styles = StyleSheet.create({
   },
   container: {
     padding: 80,
+     paddingTop: 60,
     paddingBottom: 8,
   },
   information: {
