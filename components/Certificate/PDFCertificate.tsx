@@ -56,13 +56,15 @@ const styles = StyleSheet.create({
     fontSize:37,
     color: "#32376F",
     marginBottom: 8,
-//     textTransform: "uppercase",
+   textTransform: "uppercase",
+    
   },
   heading2: {
     fontFamily: "techathonMedium",
     fontSize: 25,
     color: "#32376F",
     marginBottom: 8,
+     textTransform: "capitalize",
         
 
   },
@@ -170,7 +172,7 @@ const PDFCertificate = (props: PDFCertificateProps) => {
           <View style={styles.information}>
             <Text style={styles.heading1}>Certificate of Completion</Text>
             <Text style={styles.text}>This is to certify that</Text>
-            <Text style={[styles.menteeName, {textTransform: "capitalize"}]}>{fullName}</Text>
+            <Text style={styles.heading2}>{fullName}</Text>
             <Text style={styles.text}>has successfully completed</Text>
             <Text style={styles.heading2}>{trainingName}</Text>
             <Text style={[styles.text, styles.heading4]}>The Programme includes</Text>
