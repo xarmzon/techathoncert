@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
   },
   heading2: {
     fontFamily: "techathonMedium",
-    fontSize: 25,
+    fontSize: 28,
     color: "#32376F",
     marginBottom: 8,
      textTransform: "capitalize",
