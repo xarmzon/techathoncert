@@ -219,7 +219,7 @@ const PDFCertificate = (props: PDFCertificateProps) => {
                 {dateIssued}
             </Text>
           </View>
-          <Text style={[styles.text, { fontSize: 9, marginTop: 3 }]}>
+          <Text style={[styles.text, { fontSize: 9, marginTop: 0, marginBottom: 5 }]}>
             Verify this Proof of Completion by visiting{" "}
             <Text style={styles.link}>{`${BASE_URL}/${menteeID}`}</Text>
           </Text>
