@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     fontSize:37,
     color: "#32376F",
     marginBottom: 8,
-    textTransform: "uppercase",
+//     textTransform: "uppercase",
   },
   heading2: {
     fontFamily: "techathonMedium",
@@ -206,7 +206,7 @@ const PDFCertificate = (props: PDFCertificateProps) => {
               </Text>
             </View>
             <View style={styles.signerWrapper}>
-              <Image src="/signature_manager.png" style={styles.signature} />
+              <Image src="/signature_manager.svg" style={styles.signature} />
               <Text style={[styles.text, styles.signerName]}>Nkejah Ruth</Text>
               <Text style={[styles.text, styles.signerPost]}>
                 Learning Manager, Techathon Community
