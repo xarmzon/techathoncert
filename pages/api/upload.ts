@@ -35,7 +35,6 @@ async function uploadCertificate(
   await connectDB();
   const certFile = req.file;
   const appendUpload: boolean | string = req.body.append || false;
-  console.log(appendUpload);
   const sheets = await readSheetNames(certFile.path);
   const rows = await readXlsxFile(certFile.path, { sheet: sheets[1] });
 
