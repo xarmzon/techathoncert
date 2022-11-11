@@ -70,7 +70,7 @@ const UploadPage = () => {
     formData.append("append", `${append}`);
     setLoading(true);
     try {
-      console.log(formData.get("append"));
+      // console.log(formData.get("append"));
       const { data } = await api.post("/upload", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
