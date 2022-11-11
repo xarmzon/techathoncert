@@ -1,4 +1,4 @@
-import type { NextApiResponse } from "next";
+import type { NextApiRequest, NextApiResponse } from "next";
 import { rmSync } from "fs";
 import { resolve } from "path";
 import nc from "next-connect";
@@ -16,7 +16,17 @@ export default nc({
 })
   .use(uploader)
   .use(validator("upload"))
+  .get(getCertificates)
   .post(uploadCertificate);
+
+async function getCertificates(req: NextApiRequest, res: NextApiResponse) {
+  await connectDB();
+  const certificatesData = await CertificateModel.find({});
+
+  return res
+    .status(200)
+    .json({ data: certificatesData, status: "success", error: null });
+}
 
 async function uploadCertificate(
   req: ExtendedNextApiRequest,
@@ -24,13 +34,22 @@ async function uploadCertificate(
 ) {
   await connectDB();
   const certFile = req.file;
+  const appendUpload: boolean | string = req.body.append || false;
+  console.log(appendUpload);
   const sheets = await readSheetNames(certFile.path);
   const rows = await readXlsxFile(certFile.path, { sheet: sheets[1] });
 
   const data: ICertificate[] = [];
 
   rows.map((row, index) => {
-    const fullName = (row[0] as string).toUpperCase();
+    const fullName = (row[0] as string)
+      .trim()
+      .split(" ")
+      .map((part) => part.trim())
+      .map((part) => {
+        return part[0].toUpperCase() + part.substring(1).toLowerCase();
+      })
+      .join(" ");
     const track = (row[1] as string).toUpperCase();
     const dateIssued = row[2] as string;
     const trainingName = row[3] as string;
@@ -51,7 +70,8 @@ async function uploadCertificate(
     });
   });
 
-  await CertificateModel.deleteMany({});
+  appendUpload === false ||
+    (appendUpload === "false" && (await CertificateModel.deleteMany({})));
   await CertificateModel.create(data);
 
   let path: string[] = [];
