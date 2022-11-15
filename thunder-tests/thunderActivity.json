@@ -8,7 +8,7 @@
     "method": "GET",
     "sortNum": 0,
     "created": "2022-10-05T23:32:35.963Z",
-    "modified": "2022-10-05T23:32:36.447Z",
+    "modified": "2022-11-11T12:25:20.303Z",
     "headers": [],
     "params": [],
     "tests": []
@@ -47,6 +47,20 @@
         }
       ]
     },
+    "tests": []
+  },
+  {
+    "_id": "4f55b49e-ac72-4e9a-b2ee-28e0833baa3e",
+    "colId": "history",
+    "containerId": "",
+    "name": "http://localhost:3000/api/certificates",
+    "url": "http://localhost:3000/api/certificates",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-11-11T12:30:37.643Z",
+    "modified": "2022-11-11T13:24:14.393Z",
+    "headers": [],
+    "params": [],
     "tests": []
   }
 ]

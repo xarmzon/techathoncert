@@ -18,11 +18,13 @@ const UploadPage = () => {
   const [file, setFile] = useState<File | null>(null);
   const [password, setPassword] = useState<string>("");
   const inputRef = useRef<HTMLInputElement>(null);
+  const [append, setAppend] = useState<boolean>(true);
   const [error, setError] = useState<IError>({
     file: "",
     password: "",
     general: "",
   });
+
   const openBox = () => {
     if (inputRef.current) {
       inputRef.current.click();
@@ -38,6 +40,10 @@ const UploadPage = () => {
   const update = (e: ChangeEvent<HTMLInputElement>) => {
     error.password && setError((prev) => ({ ...prev, password: "" }));
     setPassword(e.target.value);
+  };
+
+  const updateAppend = (e: ChangeEvent<HTMLInputElement>) => {
+    setAppend((prev) => !prev);
   };
 
   const upload = async (e: FormEvent<HTMLFormElement>) => {
@@ -61,8 +67,10 @@ const UploadPage = () => {
     const formData = new FormData();
     formData.append("cert", file);
     formData.append("pass", password);
+    formData.append("append", `${append}`);
     setLoading(true);
     try {
+      // console.log(formData.get("append"));
       const { data } = await api.post("/upload", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
@@ -95,14 +103,27 @@ const UploadPage = () => {
           onSubmit={upload}
           className="mt-2 flex flex-col space-y-3 items-center"
         >
-          <div
-            onClick={openBox}
-            className="cursor-pointer group w-28 h-28 rounded-lg border-2 border-slate-200 hover:border-primary/30 duration-500 flex flex-col items-center justify-center space-y-2"
-          >
-            <FaUpload className="text-slate-300 text-5xl group-hover:text-primary/70 duration-500" />
-            <span className="text-xs text-center max-w-[90%] mx-auto text-slate-300 group-hover:text-primary/70 duration-500">
-              Select file to upload
-            </span>
+          <div className="relative flex flex-col items-center">
+            <div className="text-primary text-xs flex gap-2 mb-2 text-center">
+              <input
+                className="accent-primary"
+                onChange={updateAppend}
+                type="checkbox"
+                name="append"
+                id="append"
+                checked={append}
+              />
+              <label htmlFor="append">Append</label>
+            </div>
+            <div
+              onClick={openBox}
+              className="cursor-pointer group w-28 h-28 rounded-lg border-2 border-slate-200 hover:border-primary/30 duration-500 flex flex-col items-center justify-center space-y-2"
+            >
+              <FaUpload className="text-slate-300 text-5xl group-hover:text-primary/70 duration-500" />
+              <span className="text-xs text-center max-w-[90%] mx-auto text-slate-300 group-hover:text-primary/70 duration-500">
+                Select file to upload
+              </span>
+            </div>
           </div>
           <p
             className={`!my-[4px] text-center text-sm italic line-clamp-2 ${
